@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <title>Текстовая RPG-игра</title>
+</head>
+
+<body>
+    <!-- Модальное окно инвентаря (скрыто до активации) -->
+    <div class="inventory-modal hidden" id="inventory-modal">
+        <div class="inventory-modal__content">
+            <h2 class="inventory-modal__title">Инвентарь</h2>
+            <ul class="inventory-modal__list">
+                <!-- Список предметов будет заполняться динамически через JS -->
+            </ul>
+            <p class="inventory-modal__hint">Нажми на предмет, чтобы использовать его</p>
+            <button class="inventory-modal__close-button button--neutral" type="button">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Приветственный экран -->
+    <section class="welcome">
+        <div class="welcome__container">
+            <h1 class="welcome__title">Добро пожаловать в приключение!</h1>
+            <form class="welcome__form" id="start-form">
+                <label for="player-name" class="welcome__label">Введите имя своего персонажа:</label>
+                <input type="text" class="welcome__input" id="player-name" placeholder="Ваше имя..." required>
+                <button type="submit" class="welcome__button" aria-label="Начать игру">Начать игру</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Основной игровой экран -->
+    <main class="game hidden">
+        <div class="game__container">
+
+            <!-- Панель персонажа -->
+            <header class="character-panel">
+                <div class="character-panel__main">
+                    <div class="character-panel__avatar">
+                        <img src="./images/avatars/player_avatar.png" alt="Аватар персонажа" class="character-panel__image">
+                    </div>
+
+                    <div class="character-panel__info">
+                        <div class="character-panel__name">Имя: Viktor</div>
+                        <div class="character-panel__level">
+                            Уровень: <span class="character-panel__level-value">1</span>
+                        </div>
+                        <div class="character-panel__hp">
+                            <span class="character-panel__hp-label">HP:</span>
+                            <span class="character-panel__hp-value">100/100</span>
+                        </div>
+                        <div class="character-panel__experience">
+                            <span class="character-panel__experience-label">Опыт:</span>
+                            <span class="character-panel__experience-value">0/50</span>
+                        </div>
+                        <ul class="character-panel__stats">
+                            <li class="character-panel__stat">Сила: 10</li>
+                            <li class="character-panel__stat">Защита: 5</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="character-panel__controls">
+                    <button class="character-panel__button button--neutral" type="button">Инвентарь</button>
+                    <button class="character-panel__button button--danger" type="button">Сбросить игру</button>
+                </div>
+            </header>
+
+            <!-- Игровая сцена -->
+            <section class="game-scene">
+                <div class="game-scene__header">
+                    Локация: Деревня
+                </div>
+
+                <div class="game-scene__content">
+                    <!-- Кнопки мирных действий (по умолчанию видны) -->
+                    <div class="game-scene__actions actions--peace">
+                        <button class="game-scene__button button--neutral" data-action="rest">Отдохнуть</button>
+                        <button class="game-scene__button button--explore" data-action="go-forest">Идти в лес</button>
+                        <button class="game-scene__button button--explore" data-action="go-ruins">Идти в руины</button>
+                        <button class="game-scene__button button--explore" data-action="go-dungeon">Спуститься в подземелье</button>
+                    </div>
+
+                    <!-- Кнопки боя (по умолчанию скрыты) -->
+                    <div class="game-scene__actions actions--battle hidden">
+                        <button class="game-scene__button button--action" data-action="attack">Атаковать</button>
+                        <button class="game-scene__button button--action" data-action="defend">Защититься</button>
+                        <button class="game-scene__button button--neutral" data-action="use-item">Использовать предмет</button>
+                        <button class="game-scene__button button--danger" data-action="run">Сбежать</button>
+                    </div>
+
+                    <!-- Кнопки исследовательских действий (скрыты по умолчанию) -->
+                    <div class="game-scene__actions actions--explore hidden">
+                        <button class="game-scene__button button--explore" data-action="explore">Исследовать</button>
+                        <button class="game-scene__button button--neutral" data-action="return">Вернуться в деревню</button>
+                    </div>
+
+                    <div class="game-scene__visual">
+                        <div class="game-scene__background"></div>
+
+                        <!-- Враг (скрыт по умолчанию) -->
+                        <div class="game-scene__enemy hidden">
+                            <img src="./images/enemies/goblin.png" alt="Гоблин" class="game-scene__enemy-image">
+                            <div class="game-scene__enemy-info">
+                                <div class="game-scene__enemy-name">Гоблин</div>
+                                <div class="game-scene__enemy-hp">HP: 30/30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Журнал событий -->
+            <footer class="event-log">
+                <div class="event-log__container">
+                    <ul class="event-log__list">
+                        <li class="event-log__item">
+                            Тёмные тучи нависли над деревней. Земли за её пределами давно забыли покой: леса шепчут о
+                            чудовищах, руины хранят страшные тайны, а в глубинах подземелий притаилась древняя угроза.
+                            Настало время начать своё великое приключение...
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <section class="game-over hidden" id="game-over">
+        <div class="game-over__container">
+            <h2 class="game-over__title">Вы погибли...</h2>
+            <button class="game-over__button button--danger" id="restart-button">Начать заново</button>
+        </div>
+    </section>
+
+    <!-- Подключение основного скрипта игры -->
+    <script src="./script.js"></script>
+</body>
+
+</html>

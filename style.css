@@ -1,0 +1,519 @@
+:root {
+    --color-primary: #ff9900;
+    --color-primary-hover: #e08100;
+
+    --color-danger: #e74c3c;
+    --color-danger-hover: #c0392b;
+
+    --color-action: #27ae60;
+    --color-action-hover: #1e8449;
+
+    --color-explore: #3498db;
+    --color-explore-hover: #2980b9;
+
+    --color-background: #121212;
+    --color-panel-bg: #1f1f1f;
+
+    --border-radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    min-height: 100svh;
+    font-family: 'Handjet', 'Courier New', Courier, monospace;
+    background-color: var(--color-background);
+    color: #ffffff;
+    line-height: 1.2;
+    font-size: 1rem;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.welcome {
+    min-height: 100svh;
+    background: url('./images/backgrounds/welcome-background.png') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.welcome__container {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+}
+
+.welcome__title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.welcome__form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.welcome__input {
+    padding: 10px 15px;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    font-family: 'Handjet', sans-serif;
+    color: var(--color-background);
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.welcome__input::placeholder {
+    color: #888888;
+    font-style: italic;
+}
+
+.welcome__button {
+    padding: 12px 20px;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: 'Handjet', 'Courier New', Courier, monospace;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.welcome__button:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.game {
+    min-height: 100svh;
+    padding: 20px;
+}
+
+.game__container {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.character-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: var(--color-panel-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+}
+
+.character-panel__main {
+    display: flex;
+    gap: 20px;
+}
+
+.character-panel__avatar {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.character-panel__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.character-panel__info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.character-panel__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.character-panel__button,
+.game-scene__button {
+    padding: 10px 15px;
+    font-weight: bold;
+    font-family: 'Handjet', 'Courier New', Courier, monospace;
+    border-radius: var(--border-radius);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+}
+
+.button--neutral {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+}
+
+.button--neutral:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.button--danger {
+    background-color: var(--color-danger);
+    color: #ffffff;
+}
+
+.button--danger:hover {
+    background-color: var(--color-danger-hover);
+}
+
+.button--action {
+    background-color: var(--color-action);
+    color: #ffffff;
+}
+
+.button--action:hover {
+    background-color: var(--color-action-hover);
+}
+
+.button--explore {
+    background-color: var(--color-explore);
+    color: #ffffff;
+}
+
+.button--explore:hover {
+    background-color: var(--color-explore-hover);
+}
+
+.character-panel__button:active,
+.game-scene__button:active {
+    transform: translateY(2px);
+    opacity: 0.8;
+}
+
+.character-panel__button:focus,
+.game-scene__button:focus {
+    outline: 2px solid #ffffff;
+}
+
+.game-scene {
+    background-color: var(--color-panel-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.game-scene__header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.game-scene__content {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.game-scene__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1 1 40%;
+}
+
+.game-scene__visual {
+    position: relative;
+    flex: 1 1 55%;
+    min-height: 200px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: #000000;
+    transition: opacity 0.3s ease;
+}
+
+.game-scene__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/locations/village.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.game-scene__visual.battle .game-scene__background {
+    opacity: 0.4;
+}
+
+.game-scene__enemy {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.game-scene__enemy-image {
+    width: 100px;
+    height: auto;
+}
+
+.game-scene__enemy-info {
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.event-log {
+    background-color: var(--color-panel-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    max-height: 150px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-hover) var(--color-panel-bg);
+}
+
+.event-log__container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.event-log__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.event-log__item {
+    font-size: 1rem;
+    color: #dddddd;
+    overflow-wrap: anywhere;
+}
+
+.event-log::-webkit-scrollbar {
+    width: 8px;
+}
+
+.event-log::-webkit-scrollbar-track {
+    background: var(--color-panel-bg);
+    border-radius: var(--border-radius);
+}
+
+.event-log::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary-hover);
+    border-radius: var(--border-radius);
+}
+
+.inventory-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.inventory-modal__content {
+    background-color: var(--color-panel-bg);
+    padding: 20px 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+}
+
+.inventory-modal__description {
+    font-size: 0.8rem;
+    color: #bbb;
+    margin-top: 2px;
+}
+
+.inventory-modal__item>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.inventory-modal__title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.inventory-modal__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.inventory-modal__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #2a2a2a;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+}
+
+.inventory-modal__icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.inventory-modal__icon:hover {
+    transform: scale(1.1);
+}
+
+.inventory-modal__hint {
+    font-size: 0.9rem;
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.inventory-modal__close-button {
+    width: 100%;
+    padding: 14px 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: 'Handjet', 'Courier New', Courier, monospace;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.inventory-modal__close-button:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.game-over {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.game-over__container {
+    text-align: center;
+    background-color: var(--color-panel-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.game-over__title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.game-over__button {
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .game-scene__content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .game-scene__actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .game-scene__button {
+        flex: 1 1 45%;
+        min-width: 120px;
+    }
+
+    .game-scene__visual {
+        min-height: 250px;
+        flex: 1 1 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .welcome__title {
+        font-size: 2.2rem;
+    }
+
+    .character-panel__avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .character-panel__controls {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .character-panel__button {
+        flex: 1 1 45%;
+        min-width: 120px;
+        max-width: 200px;
+        text-align: center;
+    }
+
+    .game-scene__visual {
+        min-height: 160px;
+    }
+}
